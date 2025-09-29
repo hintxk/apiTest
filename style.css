@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+body {
+    background-color: #0F0F0F;
+    color:white;
+    font-family: Dosis;
+
+}
+.parent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+}
+
+.child {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    background-color: #111111;
+    border: 1px solid #5B5B5B;
+    padding: 15px;
+    border-radius: 5px;
+}

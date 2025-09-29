@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Vercel Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Test</h1>
+  <div class="parent" id="content">
+    <div class="child">Test</div>
+    <div class="child">Test</div>
+  </div>
+
+  <button id="addBtn">Add Content</button>
+
+  <script>
+    document.getElementById('addBtn').addEventListener('click', async () => {
+      const res = await fetch('/api/add-content');
+      const data = await res.json();
+
+      const parent = document.getElementById('content');
+      const newDiv = document.createElement('div');
+      newDiv.className = 'child';
+      newDiv.textContent = data.message;
+      parent.appendChild(newDiv);
+    });
+  </script>
+</body>
+</html>

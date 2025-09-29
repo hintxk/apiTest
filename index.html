@@ -15,17 +15,33 @@
 
   <button id="addBtn">Add Content</button>
 
-  <script>
-    document.getElementById('addBtn').addEventListener('click', async () => {
-      const res = await fetch('/api/add-content');
-      const data = await res.json();
+<script>
+  const contentDiv = document.getElementById('content');
 
-      const parent = document.getElementById('content');
-      const newDiv = document.createElement('div');
-      newDiv.className = 'child';
-      newDiv.textContent = data.message;
-      parent.appendChild(newDiv);
+  // Load saved content on page load
+  window.onload = async () => {
+    const res = await fetch('/api/add-content');
+    const items = await res.json();
+    items.forEach(item => addContentToPage(item));
+  };
+
+  // Add new content
+  document.getElementById('addBtn').addEventListener('click', async () => {
+    const res = await fetch('/api/add-content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'New dynamic content!' })
     });
-  </script>
+    const data = await res.json();
+    addContentToPage(data.message);
+  });
+
+  function addContentToPage(message) {
+    const newDiv = document.createElement('div');
+    newDiv.className = 'child';
+    newDiv.textContent = message;
+    contentDiv.appendChild(newDiv);
+  }
+</script>
 </body>
 </html>
